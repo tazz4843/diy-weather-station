@@ -50,4 +50,10 @@ lazy_static! {
         &["x", "y", "z"]
     )
     .expect("Failed to register magnetometer gauges");
+    pub static ref NOISE: Gauge =
+        register_gauge!("noise", "Noise in dB").expect("Failed to register noise gauge");
+    pub static ref WETNESS: Gauge = register_gauge!("wetness", "Is the rain sensor wet?")
+        .expect("Failed to register wetness gauge");
+    pub static ref RADIATION: Gauge = register_gauge!("radiation", "Radiation in µSv/h")
+        .expect("Failed to register radiation gauge");
 }
