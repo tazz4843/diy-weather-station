@@ -1,0 +1,7 @@
+.pio
+cmake-build-pico/
+cmake-build-debug/
+
+# Added by cargo
+
+/target
