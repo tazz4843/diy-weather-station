@@ -49,5 +49,5 @@ lazy_static! {
         "Magnetometer readings in µT",
         &["x", "y", "z"]
     )
-    .expect("Failed to register magnometer gauge");
+    .expect("Failed to register magnetometer gauges");
 }
