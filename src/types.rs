@@ -30,49 +30,49 @@ pub enum Sensor {
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Temperature {
     /// Temperature in degrees Celsius
-    pub temperature: f32,
+    pub temperature: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Humidity {
     /// Humidity in %RH
-    pub humidity: f32,
+    pub humidity: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Pressure {
     /// Pressure in hPa
-    pub pressure: f32,
+    pub pressure: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct WindSpeed {
     /// Wind speed in m/s
-    pub wind_speed: f32,
+    pub wind_speed: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct WindDirection {
     /// Wind direction in degrees
-    pub wind_direction: f32,
+    pub wind_direction: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Rainfall {
     /// Rainfall in mm
-    pub rainfall: f32,
+    pub rainfall: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Uv {
     /// Light intensity in mW/cm²
-    pub uv: f32,
+    pub uv: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Light {
     /// Light intensity in lux
-    pub light: f32,
+    pub light: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
@@ -100,13 +100,13 @@ pub struct AirQuality {
     /// * 351 - 500: Extremely polluted.
     ///   Headaches, other neurotoxic effects possible.
     ///   No exposure to anyone.
-    pub air_quality: f32,
+    pub air_quality: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct ParticulateMatter {
     /// PM2.5 in µg/m³
-    pub pm_2_5: f32,
+    pub pm_2_5: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
@@ -114,27 +114,27 @@ pub struct Lightning {
     /// Number of strikes in the last 10 minutes
     pub strikes: u32,
     /// Distance to the closest strike in km, if any (+/- 1km)
-    pub closest_distance: Option<f32>,
+    pub closest_distance: Option<f64>,
     /// Average strike distance in km, if any (+/- 1km)
-    pub average_distance: Option<f32>,
+    pub average_distance: Option<f64>,
     /// Farthest strike distance in km, if any (+/- 1km)
-    pub farthest_distance: Option<f32>,
+    pub farthest_distance: Option<f64>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Magnetometer {
     /// Magnetic field strength in µT along the x-axis
-    pub x: f32,
+    pub x: f64,
     /// Magnetic field strength in µT along the y-axis
-    pub y: f32,
+    pub y: f64,
     /// Magnetic field strength in µT along the z-axis
-    pub z: f32,
+    pub z: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Noise {
     /// Noise level in dB
-    pub noise: f32,
+    pub noise: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
@@ -146,7 +146,7 @@ pub struct Wetness {
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Radiation {
     /// Radiation level in µSv/h
-    pub radiation_sv: f32,
+    pub radiation_sv: f64,
 }
 
 #[cfg(test)]

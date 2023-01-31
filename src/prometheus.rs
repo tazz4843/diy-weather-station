@@ -24,6 +24,12 @@ lazy_static! {
     pub static ref PARTICULATE_MATTER: Gauge =
         register_gauge!("particulate_matter", "PM2.5 in µg/m³")
             .expect("Failed to register particulate matter gauge");
+    pub static ref NOISE: Gauge =
+        register_gauge!("noise", "Noise in dB").expect("Failed to register noise gauge");
+    pub static ref WETNESS: Gauge = register_gauge!("wetness", "Is the rain sensor wet?")
+        .expect("Failed to register wetness gauge");
+    pub static ref RADIATION: Gauge = register_gauge!("radiation", "Radiation in µSv/h")
+        .expect("Failed to register radiation gauge");
     pub static ref LIGHTNING_COUNT: Gauge = register_gauge!(
         "lightning_count",
         "Number of lightning strikes detected in the past 10 minutes"
@@ -50,10 +56,4 @@ lazy_static! {
         &["x", "y", "z"]
     )
     .expect("Failed to register magnetometer gauges");
-    pub static ref NOISE: Gauge =
-        register_gauge!("noise", "Noise in dB").expect("Failed to register noise gauge");
-    pub static ref WETNESS: Gauge = register_gauge!("wetness", "Is the rain sensor wet?")
-        .expect("Failed to register wetness gauge");
-    pub static ref RADIATION: Gauge = register_gauge!("radiation", "Radiation in µSv/h")
-        .expect("Failed to register radiation gauge");
 }
