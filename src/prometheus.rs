@@ -26,7 +26,7 @@ lazy_static! {
     pub static ref PARTICULATE_MATTER: Gauge =
         register_gauge!("particulate_matter", "PM2.5 in µg/m³")
             .expect("Failed to register particulate matter gauge");
-    pub static ref LIGHTNING_COUNT: IntGauge = register_int_gauge!(
+    pub static ref LIGHTNING_COUNT: Gauge = register_gauge!(
         "lightning_count",
         "Number of lightning strikes detected in the past 10 minutes"
     )
