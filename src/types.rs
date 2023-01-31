@@ -147,10 +147,6 @@ pub struct Wetness {
 pub struct Radiation {
     /// Radiation level in µSv/h
     pub radiation_sv: f32,
-    /// Radiation level in cpm
-    pub radiation_cpm: f32,
-    /// Radiation level in cps
-    pub radiation_cps: f32,
 }
 
 #[cfg(test)]
