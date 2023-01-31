@@ -1,4 +1,5 @@
-.pio
+.pio/
+.idea/
 cmake-build-pico/
 cmake-build-debug/
 
