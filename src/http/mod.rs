@@ -36,7 +36,7 @@ async fn websocket_handler(mut ws: WebSocket) {
                 Sensor::WindDirection(v) => WIND_DIRECTION.set(v.wind_direction),
                 Sensor::Rainfall(v) => RAINFALL.set(v.rainfall),
                 Sensor::Uv(v) => UV.set(v.uv),
-                Sensor::Light(v) => UV.set(v.light),
+                Sensor::Light(v) => LIGHT.set(v.light),
                 Sensor::AirQuality(v) => AIR_QUALITY.set(v.air_quality),
                 Sensor::ParticulateMatter(v) => PARTICULATE_MATTER.set(v.pm_2_5),
                 Sensor::Noise(v) => NOISE.set(v.noise),
