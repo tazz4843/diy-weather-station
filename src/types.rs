@@ -1,14 +1,16 @@
-#[derive(Serialize, Deserialize, Debug)]
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, PartialOrd)]
 pub enum WebSocketInbound {
     IncomingData(SensorData),
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, PartialOrd)]
 pub struct SensorData {
     pub sensors: Vec<Sensor>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub enum Sensor {
     Temperature(Temperature),
     Humidity(Humidity),
@@ -27,55 +29,55 @@ pub enum Sensor {
     Radiation(Radiation),
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Temperature {
     /// Temperature in degrees Celsius
     pub temperature: f32,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Humidity {
     /// Humidity in %RH
     pub humidity: f32,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Pressure {
     /// Pressure in hPa
     pub pressure: f32,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct WindSpeed {
     /// Wind speed in m/s
     pub wind_speed: f32,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct WindDirection {
     /// Wind direction in degrees
     pub wind_direction: f32,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Rainfall {
     /// Rainfall in mm
     pub rainfall: f32,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Uv {
     /// Light intensity in mW/cm²
     pub uv: f32,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Light {
     /// Light intensity in lux
     pub light: f32,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct AirQuality {
     /// VOC index - 0 to 500
     ///
@@ -103,13 +105,13 @@ pub struct AirQuality {
     pub air_quality: f32,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct ParticulateMatter {
     /// PM2.5 in µg/m³
     pub pm_2_5: f32,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Lightning {
     /// Number of strikes in the last 10 minutes
     pub strikes: u32,
@@ -121,7 +123,7 @@ pub struct Lightning {
     pub farthest_distance: Option<f32>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Magnetometer {
     /// Magnetic field strength in µT along the x-axis
     pub x: f32,
@@ -131,19 +133,19 @@ pub struct Magnetometer {
     pub z: f32,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Noise {
     /// Noise level in dB
     pub noise: f32,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Wetness {
     /// Is the rain sensor wet?
     pub is_wet: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Radiation {
     /// Radiation level in µSv/h
     pub radiation_sv: f32,

@@ -1,5 +1,5 @@
 use lazy_static::lazy_static;
-use prometheus::{register_gauge, Gauge};
+use prometheus::{register_gauge, register_gauge_vec, Gauge, GaugeVec};
 
 lazy_static! {
     pub static ref TEMPERATURE: Gauge = register_gauge!("temperature", "Temperature in °C")
@@ -48,5 +48,6 @@ lazy_static! {
         "magnetometer",
         "Magnetometer readings in µT",
         &["x", "y", "z"]
-    );
+    )
+    .expect("Failed to register magnometer gauge");
 }

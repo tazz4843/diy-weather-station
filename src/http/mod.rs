@@ -3,6 +3,8 @@ use axum::response::Response;
 use axum::routing::get;
 use axum::Router;
 
+use crate::types::WebSocketInbound;
+
 pub async fn websocket_route(ws: WebSocketUpgrade) -> Response {
     ws.on_upgrade(websocket_handler)
 }
@@ -16,6 +18,14 @@ async fn websocket_handler(mut ws: WebSocket) {
                 break;
             }
         };
+        let inbound: WebSocketInbound = match rmp_serde::from_slice(&msg) {
+            Ok(v) => v,
+            Err(e) => {
+                error!("Error deserializing MessagePack: {e}");
+                return;
+            }
+        };
+        let WebSocketInbound::IncomingData(inbound) = inbound;
     }
 }
 
