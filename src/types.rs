@@ -1,4 +1,5 @@
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, PartialOrd)]
+#[non_exhaustive]
 pub enum WebSocketInbound {
     IncomingData(SensorData),
 }
@@ -49,6 +50,8 @@ pub struct Pressure {
 pub struct WindSpeed {
     /// Wind speed in m/s
     pub wind_speed: f64,
+    /// Gust wind speed in m/s
+    pub wind_gust: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
@@ -112,13 +115,13 @@ pub struct ParticulateMatter {
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Lightning {
     /// Number of strikes in the last 10 minutes
-    pub strikes: u32,
+    pub strikes: i64,
     /// Distance to the closest strike in km, if any (+/- 1km)
-    pub closest_distance: Option<f64>,
+    pub closest_distance: Option<i64>,
     /// Average strike distance in km, if any (+/- 1km)
-    pub average_distance: Option<f64>,
+    pub average_distance: Option<i64>,
     /// Farthest strike distance in km, if any (+/- 1km)
-    pub farthest_distance: Option<f64>,
+    pub farthest_distance: Option<i64>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]

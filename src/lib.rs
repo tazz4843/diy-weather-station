@@ -6,3 +6,5 @@ extern crate serde;
 mod http;
 mod prometheus;
 mod types;
+
+pub use http::run;

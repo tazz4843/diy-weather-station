@@ -1,6 +1,7 @@
 use lazy_static::lazy_static;
 use prometheus::{
-    register_gauge, register_gauge_vec, register_int_gauge, Gauge, GaugeVec, IntGauge,
+    register_gauge, register_gauge_vec, register_int_gauge, register_int_gauge_vec, Gauge,
+    GaugeVec, IntGauge, IntGaugeVec,
 };
 
 lazy_static! {
@@ -26,30 +27,21 @@ lazy_static! {
     pub static ref PARTICULATE_MATTER: Gauge =
         register_gauge!("particulate_matter", "PM2.5 in µg/m³")
             .expect("Failed to register particulate matter gauge");
-    pub static ref LIGHTNING_COUNT: Gauge = register_gauge!(
+    pub static ref LIGHTNING_COUNT: IntGauge = register_int_gauge!(
         "lightning_count",
         "Number of lightning strikes detected in the past 10 minutes"
     )
     .expect("Failed to register lightning count gauge");
-    pub static ref LIGHTNING_CLOSEST_DISTANCE: IntGauge = register_int_gauge!(
-        "lightning_closest_distance",
-        "Distance to the closest strike in km, if any (+/- 1km)"
+    pub static ref LIGHTNING_DISTANCE: IntGaugeVec = register_int_gauge_vec!(
+        "lightning_distance",
+        "Distance to strikes, with +/- 1km accuracy",
+        &["bound"]
     )
-    .expect("Failed to register lightning closest distance gauge");
-    pub static ref LIGHTNING_AVERAGE_DISTANCE: IntGauge = register_int_gauge!(
-        "lightning_average_distance",
-        "Average strike distance in km, if any (+/- 1km)"
-    )
-    .expect("Failed to register lightning average distance gauge");
-    pub static ref LIGHTNING_FARTHEST_DISTANCE: IntGauge = register_int_gauge!(
-        "lightning_farthest_distance",
-        "Distance to the farthest strike in km, if any (+/- 1km)"
-    )
-    .expect("Failed to register lightning farthest distance gauge");
+    .expect("Failed to register lightning distance gauges");
     pub static ref MAGNETOMETER: GaugeVec = register_gauge_vec!(
         "magnetometer",
         "Magnetometer readings in µT",
-        &["x", "y", "z"]
+        &["dimension"]
     )
     .expect("Failed to register magnetometer gauges");
     pub static ref NOISE: Gauge =
