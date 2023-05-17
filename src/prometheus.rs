@@ -7,8 +7,9 @@ use prometheus::{
 lazy_static! {
     pub static ref TEMPERATURE: Gauge = register_gauge!("temperature", "Temperature in °C")
         .expect("Failed to register temperature gauge");
-    pub static ref FEELS_LIKE: Gauge = register_gauge!("feels_like", "Feels like temperature in °C")
-        .expect("Failed to register feels like gauge");
+    pub static ref FEELS_LIKE: Gauge =
+        register_gauge!("feels_like", "Feels like temperature in °C")
+            .expect("Failed to register feels like gauge");
     pub static ref HUMIDITY: Gauge =
         register_gauge!("humidity", "Humidity in %RH").expect("Failed to register humidity gauge");
     pub static ref PRESSURE: Gauge =
@@ -24,6 +25,9 @@ lazy_static! {
         .expect("Failed to register UV gauge");
     pub static ref LIGHT: Gauge =
         register_gauge!("light", "Light intensity in lux").expect("Failed to register light gauge");
+    pub static ref RAW_LIGHT: IntGaugeVec =
+        register_int_gauge_vec!("raw_light", "Raw light intensity", &["spectrum"])
+            .expect("Failed to register raw light gauges");
     pub static ref AIR_QUALITY: Gauge = register_gauge!("air_quality", "VOC index - 0 to 500")
         .expect("Failed to register air quality gauge");
     pub static ref PARTICULATE_MATTER: Gauge =

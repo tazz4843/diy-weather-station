@@ -70,6 +70,16 @@ pub struct Uv {
 pub struct Light {
     /// Light intensity in lux
     pub light: f64,
+
+    /// Raw light sensor reading for both visible and IR light
+    #[serde(rename = "full_spectrum")]
+    pub raw_light: i64,
+    /// Raw light sensor reading for visible spectrum
+    #[serde(rename = "visible")]
+    pub raw_visible: i64,
+    /// Raw light sensor reading for IR spectrum
+    #[serde(rename = "infrared")]
+    pub raw_ir: i64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]

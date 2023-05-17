@@ -27,7 +27,14 @@ async fn weather_push_route(Json(inbound): Json<SensorData>) {
             Sensor::WindDirection(v) => WIND_DIRECTION.set(v.wind_direction),
             Sensor::Rainfall(v) => RAINFALL.set(v.rainfall),
             Sensor::Uv(v) => UV.set(v.uv),
-            Sensor::Light(v) => LIGHT.set(v.light),
+            Sensor::Light(v) => {
+                LIGHT.set(v.light);
+                RAW_LIGHT
+                    .with_label_values(&["full_spectrum"])
+                    .set(v.raw_light);
+                RAW_LIGHT.with_label_values(&["visible"]).set(v.raw_visible);
+                RAW_LIGHT.with_label_values(&["ir"]).set(v.raw_ir);
+            }
             Sensor::AirQuality(v) => AIR_QUALITY.set(v.air_quality),
             Sensor::ParticulateMatter(v) => PARTICULATE_MATTER.set(v.pm_2_5),
             Sensor::Noise(v) => NOISE.set(v.noise),
