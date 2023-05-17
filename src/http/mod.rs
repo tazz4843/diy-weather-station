@@ -56,7 +56,7 @@ async fn prometheus_route() -> Vec<u8> {
 
 fn build_router() -> Router {
     Router::new()
-        .route("/push", get(weather_push_route))
+        .route("/push", post(weather_push_route))
         .route("/metrics", get(prometheus_route))
 }
 
