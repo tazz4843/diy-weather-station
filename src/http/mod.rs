@@ -62,7 +62,7 @@ fn build_router() -> Router {
 
 pub async fn run() {
     let app = build_router();
-    let addr = ([0, 0, 0, 0], 3000).into();
+    let addr = ([0, 0, 0, 0], 2950).into();
     axum::Server::bind(&addr)
         .serve(app.into_make_service())
         .await
