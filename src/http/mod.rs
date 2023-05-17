@@ -1,6 +1,6 @@
 use crate::prometheus::*;
 use crate::types::{Sensor, SensorData,};
-use axum::routing::get;
+use axum::routing::{get, post};
 use axum::{Json, Router};
 use prometheus::{Encoder, TextEncoder};
 
