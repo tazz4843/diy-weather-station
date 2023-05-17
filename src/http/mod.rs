@@ -1,16 +1,29 @@
 use crate::prometheus::*;
-use crate::types::{Sensor, SensorData,};
+use crate::types::{Sensor, SensorData};
 use axum::routing::{get, post};
 use axum::{Json, Router};
 use prometheus::{Encoder, TextEncoder};
 
 async fn weather_push_route(Json(inbound): Json<SensorData>) {
+    let mut temp_set = false;
+    let mut humidity_set = false;
+    let mut wind_speed_set = false;
+
     for sensor in inbound.sensors {
         match sensor {
-            Sensor::Temperature(v) => TEMPERATURE.set(v.temperature),
-            Sensor::Humidity(v) => HUMIDITY.set(v.humidity),
+            Sensor::Temperature(v) => {
+                TEMPERATURE.set(v.temperature);
+                temp_set = true;
+            }
+            Sensor::Humidity(v) => {
+                HUMIDITY.set(v.humidity);
+                humidity_set = true;
+            }
             Sensor::Pressure(v) => PRESSURE.set(v.pressure),
-            Sensor::WindSpeed(v) => WIND_SPEED.set(v.wind_speed),
+            Sensor::WindSpeed(v) => {
+                WIND_SPEED.set(v.wind_speed);
+                wind_speed_set = true;
+            }
             Sensor::WindDirection(v) => WIND_DIRECTION.set(v.wind_direction),
             Sensor::Rainfall(v) => RAINFALL.set(v.rainfall),
             Sensor::Uv(v) => UV.set(v.uv),
@@ -38,6 +51,39 @@ async fn weather_push_route(Json(inbound): Json<SensorData>) {
                 MAGNETOMETER.with_label_values(&["z"]).set(v.z);
             }
         }
+    }
+
+    if temp_set && humidity_set {
+        // try calculating feels like
+        let temperature = TEMPERATURE.get();
+        let humidity = HUMIDITY.get();
+
+        let feels_like = if temperature >= 27.0 {
+            let temp_pow2 = temperature.powi(2);
+            let humidity_pow2 = humidity.powi(2);
+
+            -8.78469475556
+                + (1.61139411 * temperature)
+                + (2.33854883889 * humidity)
+                + (-0.14611605 * temperature * humidity)
+                + (-0.012308094 * temp_pow2)
+                + (-0.0164248277778 * humidity_pow2)
+                + (0.002211732 * temp_pow2 * humidity)
+                + (0.00072456 * temperature * humidity_pow2)
+                + (-0.000003582 * temp_pow2 * humidity_pow2)
+        } else if wind_speed_set && temperature <= 10.0 && WIND_SPEED.get() > 1.3333333 {
+            let wind_speed = WIND_SPEED.get();
+            // convert to km/h
+            let wind_speed = wind_speed * 3.6;
+            let wind_speed_pow016 = wind_speed.powf(0.16);
+
+            13.12 + (0.6215 * temperature) - (11.37 * wind_speed_pow016)
+                + (0.3965 * temperature * wind_speed_pow016)
+        } else {
+            temperature
+        };
+
+        FEELS_LIKE.set(feels_like);
     }
 }
 

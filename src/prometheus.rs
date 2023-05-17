@@ -7,6 +7,8 @@ use prometheus::{
 lazy_static! {
     pub static ref TEMPERATURE: Gauge = register_gauge!("temperature", "Temperature in °C")
         .expect("Failed to register temperature gauge");
+    pub static ref FEELS_LIKE: Gauge = register_gauge!("feels_like", "Feels like temperature in °C")
+        .expect("Failed to register feels like gauge");
     pub static ref HUMIDITY: Gauge =
         register_gauge!("humidity", "Humidity in %RH").expect("Failed to register humidity gauge");
     pub static ref PRESSURE: Gauge =
