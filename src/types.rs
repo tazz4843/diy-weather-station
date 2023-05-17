@@ -1,10 +1,4 @@
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, PartialOrd)]
-#[non_exhaustive]
-pub enum WebSocketInbound {
-    IncomingData(SensorData),
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, PartialOrd)]
 pub struct SensorData {
     pub sensors: Vec<Sensor>,
 }
@@ -150,23 +144,4 @@ pub struct Wetness {
 pub struct Radiation {
     /// Radiation level in µSv/h
     pub radiation_sv: f64,
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    pub fn msgpack_enum_test() {
-        let test_enum = WebSocketInbound::IncomingData(SensorData {
-            sensors: vec![Sensor::Temperature(Temperature { temperature: 1.0 })],
-        });
-
-        // attempt to serialize the enum
-        let serialized = rmp_serde::to_vec(&test_enum).unwrap();
-        // then deserialize it
-        let deserialized: WebSocketInbound = rmp_serde::from_slice(&serialized).unwrap();
-        // check that the deserialized enum is the same as the original
-        assert_eq!(test_enum, deserialized);
-    }
 }
