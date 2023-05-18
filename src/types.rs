@@ -84,30 +84,22 @@ pub struct Light {
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct AirQuality {
-    /// VOC index - 0 to 500
+    /// Air quality index
     ///
-    /// * 0 - 50: Excellent.
-    ///   Pure air, best for well-being.
-    ///   No measures required
-    /// * 51 - 100: Good.
-    ///   No irritation or impact on well-being.
-    ///   No measures required
-    /// * 101 - 150: Lightly polluted.
-    ///   Reduction of well-being possible.
-    ///   Caution suggested
-    /// * 151 - 200: Moderately polluted.
-    ///   More significant irritation possible.
-    ///   Strong caution suggested, reduce exposure
-    /// * 201 - 250: Heavily polluted.
-    ///   Exposure may lead to effects like headache depending on type of VOCs.
-    ///   No exposure recommended in high risk groups, reduce exposure in others
-    /// * 251 - 350: Severely polluted.
-    ///   More severe effects possible, depending on type of VOCs.
-    ///   No exposure in medium or high risk groups, reduce exposure in healthy people
-    /// * 351 - 500: Extremely polluted.
-    ///   Headaches, other neurotoxic effects possible.
-    ///   No exposure to anyone.
-    pub air_quality: f64,
+    /// 1 - 2: Excellent - indefinite exposure
+    /// 3: Good - 12 months exposure
+    /// 4: Poor - long-term exposure may have adverse effects - max 1 month
+    /// 5: Extremely poor - highly neurotoxic - max exposure of hours
+    pub aqi: i64,
+
+    /// TVOC in ppb
+    pub tvoc: f64,
+
+    /// eCO2 in ppm
+    pub eco2: f64,
+
+    /// Raw gas sensor reading
+    pub resistances: [i64; 4],
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, PartialOrd)]

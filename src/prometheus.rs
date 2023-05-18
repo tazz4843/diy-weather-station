@@ -28,8 +28,19 @@ lazy_static! {
     pub static ref RAW_LIGHT: IntGaugeVec =
         register_int_gauge_vec!("raw_light", "Raw light intensity", &["spectrum"])
             .expect("Failed to register raw light gauges");
-    pub static ref AIR_QUALITY: Gauge = register_gauge!("air_quality", "VOC index - 0 to 500")
-        .expect("Failed to register air quality gauge");
+    pub static ref AIR_QUALITY: IntGauge =
+        register_int_gauge!("air_quality", "VOC index - 0 to 500")
+            .expect("Failed to register air quality gauge");
+    pub static ref TVOC: Gauge = register_gauge!("tvoc", "Total Volatile Organic Compounds in ppb")
+        .expect("Failed to register TVOC gauge");
+    pub static ref ECO2: Gauge =
+        register_gauge!("eco2", "Equivalent CO₂ in ppm").expect("Failed to register eCO₂ gauge");
+    pub static ref MOX_RESISTANCES: IntGaugeVec = register_int_gauge_vec!(
+        "aqs_resistances",
+        "Resistance of the MOX element in the AQI sensor in Ω",
+        &["electrode"]
+    )
+    .expect("Failed to register MOX resistances gauges");
     pub static ref PARTICULATE_MATTER: Gauge =
         register_gauge!("particulate_matter", "PM2.5 in µg/m³")
             .expect("Failed to register particulate matter gauge");

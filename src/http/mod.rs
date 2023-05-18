@@ -35,7 +35,16 @@ async fn weather_push_route(Json(inbound): Json<SensorData>) {
                 RAW_LIGHT.with_label_values(&["visible"]).set(v.raw_visible);
                 RAW_LIGHT.with_label_values(&["ir"]).set(v.raw_ir);
             }
-            Sensor::AirQuality(v) => AIR_QUALITY.set(v.air_quality),
+            Sensor::AirQuality(v) => {
+                AIR_QUALITY.set(v.aqi);
+                TVOC.set(v.tvoc);
+                ECO2.set(v.eco2);
+                for (i, element_resistance) in v.resistances.into_iter().enumerate() {
+                    MOX_RESISTANCES
+                        .with_label_values(&[&i.to_string()])
+                        .set(element_resistance);
+                }
+            }
             Sensor::ParticulateMatter(v) => PARTICULATE_MATTER.set(v.pm_2_5),
             Sensor::Noise(v) => NOISE.set(v.noise),
             Sensor::Wetness(v) => WETNESS.set(v.is_wet as _),
