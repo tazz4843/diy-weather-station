@@ -1,0 +1,8 @@
+influx_url = "http://localhost:8086"
+influx_db = "weather"
+
+target_url = "192.168.1.79"
+
+[pws_weather]
+id = "HAYL1"
+password = "63421257cca24d12b52667fc8c5c045c"

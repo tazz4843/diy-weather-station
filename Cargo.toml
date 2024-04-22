@@ -1,16 +1,21 @@
 [package]
-name = "weather_station_server"
-version = "0.1.0"
+name = "root"
+version = "0.0.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-tracing = "0.1"
-rmp-serde = "1"
-prometheus = "0.13"
-lazy_static = "1"
-axum = { version = "0.6", features = ["ws"] }
-tokio = { version = "1", features = ["full"] }
-serde = { version = "1", features = ["derive"] }
-tracing-subscriber = { version = "0.3", features = ["env-filter", "parking_lot"] }
+
+[workspace]
+members = [
+	"server",
+	"client/app",
+	"client/bootloader",
+	"common",
+]
+
+[profile.release]
+debug = 2
+
+[patch.crates-io]
+embassy-time = { version = "0.3", git = "https://github.com/embassy-rs/embassy" }
+embassy-net = { version = "0.4", git = "https://github.com/embassy-rs/embassy" }

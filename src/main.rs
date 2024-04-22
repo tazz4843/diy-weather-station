@@ -1,8 +1,3 @@
-use weather_station_server::run;
-
-#[tokio::main]
-async fn main() {
-    tracing_subscriber::fmt::init();
-
-    run().await
+fn main() {
+    println!("this crate does nothing: see the workspace members");
 }

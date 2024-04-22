@@ -3,26 +3,23 @@
 version: '3'
 
 services:
-  prometheus:
-    image: prom/prometheus
-    user: 1000:1000 # may need to change this to your user id
-    ports:
-      - 9090:9090
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-      # mount the data directory to persist data
-      - ./data/prom:/prometheus
-    command:
-      # due to this being a station, we can set retention to 10 years
-      - '--storage.tsdb.retention.time=87660h'
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-
   grafana:
     image: grafana/grafana-oss
-    user: 1000:1000 # may need to change this to your user id
+    user: '1000' # may need to change this to your user id
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=weather
     ports:
-      - 3000:3000
+      - "3003:3000"
     volumes:
       - ./grafana.ini:/etc/grafana/grafana.ini
       - ./data/gf:/var/lib/grafana
+
+  influx:
+    image: influxdb:1.8
+    restart: always
+    environment:
+      - INFLUXDB_DB=weather
+    volumes:
+      - ./data/influx:/var/lib/influxdb
+    ports:
+      - "8086:8086"

@@ -1,0 +1,18 @@
+[package]
+name = "weather_station_server"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+toml = "0.8"
+chrono = "0.4"
+tracing = "0.1"
+serde_json = "1"
+tokio-stream = "0.1"
+tokio = { version = "1", features = ["full"] }
+common = { path = "../common", features = ["std"] }
+influxdb = { version = "0.7.2", features = ["derive"] }
+reqwest = { version = "0.12", features = ["json"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter", "parking_lot"] }
