@@ -7,9 +7,10 @@ use cortex_m_rt::{entry, exception};
 use defmt::{debug, info};
 use defmt_rtt as _;
 use embassy_boot_rp::*;
-use embassy_rp::gpio::{Level, Output};
 use embassy_sync::blocking_mutex::Mutex;
 use embassy_time::{Duration, Instant};
+#[cfg(feature = "panic-probe")]
+use panic_probe;
 
 const FLASH_SIZE: usize = 2 * 1024 * 1024;
 const MAXIMUM_WATCHDOG_TIMEOUT: Duration = Duration::from_micros(8388607);
@@ -65,9 +66,4 @@ unsafe fn DefaultHandler(_: i16) -> ! {
 	let irqn = core::ptr::read_volatile(SCB_ICSR) as u8 as i16 - 16;
 
 	panic!("DefaultHandler #{:?}", irqn);
-}
-
-#[panic_handler]
-fn panic(_info: &core::panic::PanicInfo) -> ! {
-	cortex_m::asm::udf();
 }
