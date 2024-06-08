@@ -99,10 +99,10 @@ async fn main(spawner: Spawner) {
 	initialize_i2c(p.PIN_20, p.PIN_21, p.I2C0);
 
 	// load Wi-Fi chip firmware from flash (requires `probe-rs` tool and firmware files pre-flashed)
-	//     probe-rs download 43439A0.bin --format bin --chip RP2040 --base-address 0x101c0000
-	//     probe-rs download 43439A0_clm.bin --format bin --chip RP2040 --base-address 0x101fa000
-	let fw = unsafe { core::slice::from_raw_parts(0x101c0000 as *const u8, 230321) };
-	let clm = unsafe { core::slice::from_raw_parts(0x101fa000 as *const u8, 4752) };
+	//     probe-rs download 43439A0.bin --format bin --chip RP2040 --base-address 0x101ba000
+	//     probe-rs download 43439A0_clm.bin --format bin --chip RP2040 --base-address 0x101f3000
+	let fw = unsafe { core::slice::from_raw_parts(0x101c2000 as *const u8, 230321) };
+	let clm = unsafe { core::slice::from_raw_parts(0x101fb000 as *const u8, 4752) };
 
 	// prepare SPI for Wi-Fi chip
 	watchdog.feed();
